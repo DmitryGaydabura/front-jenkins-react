@@ -1,38 +1,41 @@
-.App {
-  text-align: center;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#root {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  min-height: 100vh; /* Высота окна браузера */
+}
+
+.container {
+  flex: 1; /* Заставляем контейнер занимать всю доступную высоту */
+}
+
+.footer {
+  background-color: #bebebe; /* Серый цвет для фона */
+  padding: 20px 0;
+  text-align: center;
+  width: 100%; /* Растягиваем на всю ширину */
+  position: relative;
+  left: 0;
+  bottom: 0;
+}
+
+.footer-links {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 30px; /* Отступы между ссылками */
 }
 
-.App-link {
-  color: #61dafb;
+.footer-links a {
+  text-decoration: none; /* Убираем подчеркивание */
+  color: #555; /* Темно-серый цвет для ссылок */
+  font-weight: bold;
+  transition: color 0.3s ease; /* Плавный переход цвета при наведении */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footer-links a:hover {
+  color: #ffffff; /* Цвет ссылок при наведении */
 }
