@@ -3,13 +3,16 @@ import { Tabs, Tab } from 'react-bootstrap';
 import TeamManagement from './TeamManagement';
 import UserManagement from './UserManagement';
 import ActivityManagement from './ActivityManagement';
-import JournalManagement from './JournalManagement';  // Импортируем новый компонент для журнала
+import JournalManagement from './JournalManagement';  // Импортируем компонент JournalManagement
 
 const App = () => {
   return (
       <div className="container mt-5">
         <h1 className="text-center mb-5">Management Dashboard</h1>
-        <Tabs defaultActiveKey="team" id="management-tabs" className="mb-3">
+        <Tabs defaultActiveKey="journal" id="management-tabs" className="mb-3">
+          <Tab eventKey="journal" title="Journal Management">
+            <JournalManagement />
+          </Tab>
           <Tab eventKey="team" title="Team Management">
             <TeamManagement />
           </Tab>
@@ -18,9 +21,6 @@ const App = () => {
           </Tab>
           <Tab eventKey="activity" title="Activity Management">
             <ActivityManagement />
-          </Tab>
-          <Tab eventKey="journal" title="Journal Management">  {/* Новая вкладка для журнала */}
-            <JournalManagement />  {/* Подключение компонента JournalManagement */}
           </Tab>
         </Tabs>
       </div>

@@ -1,39 +1,42 @@
 import React, { useState } from 'react';
 import api from './api';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const AddParticipant = ({ team, onAdd }) => {
   const [name, setName] = useState('');
+  const [error, setError] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleAddParticipant = async () => {
+    if (!name) {
+      setError('Имя участника обязательно.');
+      return;
+    }
+
     try {
-      const response = await api.post('/api/participants', { name, team });
-      onAdd(response.data.participant);
-      setName('');
+      await api.post('/api/participants', { name, team });
+      setName('');  // Очищаем поле после успешного добавления
+      onAdd();  // Сообщаем родителю об обновлении
+      setError(null);
     } catch (error) {
       console.error('Error adding participant:', error);
+      setError('Не удалось добавить участника. Пожалуйста, попробуйте снова.');
     }
   };
 
   return (
-      <form onSubmit={handleSubmit} className="mb-3">
-        <div className="input-group">
-          <input
-              type="text"
-              className="form-control"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder={`Add participant to ${team}`}
-              required
-          />
-          <button type="submit" className={`btn btn-${team === 'blue' ? 'primary' : 'warning'} ml-2`}>
-            <FontAwesomeIcon icon={faPlus} /> Add
-          </button>
-        </div>
-      </form>
+      <div className="input-group mb-3">
+        <input
+            type="text"
+            className="form-control"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter Participant Name"
+        />
+        <button className="btn btn-primary" onClick={handleAddParticipant}>
+          Add Participant
+        </button>
+        {error && <div className="alert alert-danger mt-2">{error}</div>}
+      </div>
   );
 };
 
-export default AddParticipant
+export default AddParticipant;
